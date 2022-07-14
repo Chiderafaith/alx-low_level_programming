@@ -20,9 +20,9 @@ res = res * 10;
 res -= (s[i] - '0');
 brk = 1;
 }
-else if(brk == 1)
+else if (brk == 1)
 break;
 }
-res = sig * res;
+res = sig *res;
 return (res);
 }
