@@ -7,7 +7,7 @@
 int len(char *str)
 {
 int len = 0;
-f (str != NULL)
+if (str != NULL)
 {
 while (str[len])
 len++;
@@ -51,10 +51,10 @@ char **split;
 int i, j = 0, temp = 0, size = 0, words = num_words(str);
 if (words == 0)
 return (NULL);
-plit = (char **)malloc(sizeof(char *) * (words + 1));
+split = (char **)malloc(sizeof(char *) * (words + 1));
 if (split != NULL)
 {
-for (i = 0; i <= len(str) && words; i++
+for (i = 0; i <= len(str) && words; i++)
 {
 if ((str[i] != ' ') && (str[i] != '\0'))
 size++;
