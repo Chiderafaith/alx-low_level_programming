@@ -65,7 +65,7 @@ if (split[j] != NULL)
 {
 while (temp < size)
 {
-split[j][temp] = str[(i - size) + temp];
+split[j][temp] = str[(i - size) +temp];
 temp++;
 }
 split[j][temp] = '\0';
