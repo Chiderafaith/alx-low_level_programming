@@ -1,4 +1,6 @@
-nclude "variadic_functions.h"
+#include "variadic_functions.h"
+#include <stdlib.h>
+#include <stdio.h>
 /**
  * print_char - prints char
  * @c: Contains a value in a variadic list
