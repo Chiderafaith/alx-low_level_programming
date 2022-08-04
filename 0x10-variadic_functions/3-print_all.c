@@ -51,7 +51,7 @@ print_opc opc[] = {
 {"c", print_char},
 {"i", print_int},
 {"f", print_float},
-{"s", print_string}	
+{"s", print_string}
 };
 int i = 0;
 int j;
