@@ -1,24 +1,26 @@
-#include "variadic_functions.h"
-
-#include <stdlib.h>
-
-#include <stdio.h>
+nclude "variadic_functions.h"
 
 
 
 /**
  *
- *  * _printchar - print char type element from va_list
+ *  * print_char - prints char
  *
- *   * @list: va_list passed to function
+ *   * @c: Contains a value in a variadic list
  *
- *    */
+ *    *
+ *
+ *     * Return: Void function.
+ *
+ *      */
 
-void _printchar(va_list list)
+
+
+void print_char(va_list c)
 
 {
 
-		printf("%c", va_arg(list, int));
+		printf("%c", va_arg(c, int));
 
 }
 
@@ -26,27 +28,23 @@ void _printchar(va_list list)
 
 /**
  *
- *  * _printstr - print string element from va_list
+ *  * print_int - prints int
  *
- *   * @list: va_list passed to function
+ *   * @i: Contains a value in a variadic list
  *
- *    */
+ *    *
+ *
+ *     * Return: Void function.
+ *
+ *      */
 
-void _printstr(va_list list)
+
+
+void print_int(va_list i)
 
 {
 
-		char *s;
-
-
-
-			s = va_arg(list, char *);
-
-				if (s == NULL)
-
-							s = "(nil)";
-
-					printf("%s", s);
+		printf("%i", va_arg(i, int));
 
 }
 
@@ -54,17 +52,23 @@ void _printstr(va_list list)
 
 /**
  *
- *  * _printfloat - print float type element from va_list
+ *  * print_float - prints float
  *
- *   * @list: va_list passed to function
+ *   * @f: Contains a value in a variadic list
  *
- *    */
+ *    *
+ *
+ *     * Return: Void function.
+ *
+ *      */
 
-void _printfloat(va_list list)
+
+
+void print_float(va_list f)
 
 {
 
-		printf("%f", va_arg(list, double));
+		printf("%f", va_arg(f, double));
 
 }
 
@@ -72,17 +76,33 @@ void _printfloat(va_list list)
 
 /**
  *
- *  * _printint - print int type element from va_list
+ *  * print_string - prints string
  *
- *   * @list: va_list passed to function
+ *   * @s: Contains a value in a variadic list
  *
- *    */
+ *    *
+ *
+ *     * Return: Void function.
+ *
+ *      */
 
-void _printint(va_list list)
+
+
+void print_string(va_list s)
 
 {
 
-		printf("%d", va_arg(list, int));
+		char *res;
+
+
+
+			res = va_arg(s, char *);
+
+				if (res == 0)
+
+							res = "(nil)";
+
+					printf("%s", res);
 
 }
 
@@ -90,70 +110,84 @@ void _printint(va_list list)
 
 /**
  *
- *  * print_all - print anything passed if char, int, float, or string.
+ *  * print_all - prints anything
  *
- *   * @format: string of formats to use and print
+ *   * @format: list of types of arguments.
  *
- *    */
+ *    * @...: Arguments.
+ *
+ *     *
+ *
+ *      * Return: Void function.
+ *
+ *       */
+
+
 
 void print_all(const char * const format, ...)
 
 {
 
-		unsigned int i, j;
+		print_opc opc[] = {
 
-			va_list args;
+					{"c", print_char},
 
-				char *sep;
+							{"i", print_int},
 
+									{"f", print_float},
 
+											{"s", print_string}
 
-					checker storage[] = {
-
-								{ "c", _printchar },
-
-										{ "f", _printfloat },
-
-												{ "s", _printstr },
-
-														{ "i", _printint }
-
-									};
+						};
 
 
 
-						i = 0;
+			int i = 0;
 
-							sep = "";
-
-								va_start(args, format);
-
-									while (format != NULL && format[i / 4] != '\0')
-
-											{
-
-														j = i % 4;
-
-																if (storage[j].type[0] == format[i / 4])
-
-																			{
-
-																							printf("%s", sep);
-
-																										storage[j].f(args);
-
-																													sep = ", ";
-
-																															}
-
-																		i++;
-
-																			}
-
-										printf("\n");
+				int j;
 
 
 
-											va_end(args);
+					va_list to_print;
+
+						char *coma = "";
+
+
+
+							va_start(to_print, format);
+
+								while (format && format[i])
+
+										{
+
+													j = 0;
+
+															while (j < 4)
+
+																		{
+
+																						if (format[i] == opc[j].c[0])
+
+																										{
+
+																															printf("%s", coma);
+
+																																			opc[j].f(to_print);
+
+																																							coma = ", ";
+
+																																										}
+
+																									j++;
+
+																											}
+
+																	i++;
+
+																		}
+
+									printf("\n");
+
+										va_end(to_print);
 
 }
