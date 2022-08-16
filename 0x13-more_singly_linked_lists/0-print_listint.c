@@ -1,16 +1,20 @@
 #include "lists.h"
+#include <stdio.h>
 /**
- * print_listint - Prints elements into the list.
- * @h: Call structure in the header file.
- * Return: Number of nodes
+ * print_listint - Print elements of a singly linked list.
+ * @h: Pointer to a list.
+ * Return: Integer.
  */
 size_t print_listint(const listint_t *h)
 {
-unsigned int s;
-for (s = 0; h != NULL; s++)
+const listint_t *tp;
+unsigned int cntr = 0;
+tp = h;
+while (tp)
 {
-printf("%i\n", h->n);
-h = h->next;
+printf("%d\n", tp->n);
+cntr++;
+tp = tp->next;
 }
-return (s);
+return (cntr);
 }
